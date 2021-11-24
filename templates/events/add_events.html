@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block content %}
+
+  
+
+
+  <!-- ======= Blog Header ======= -->
+    <div class="header-bg page-area">
+      <div class="container position-relative">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="slider-content text-center">
+              <div class="header-bottom">
+                <div class="layer2">
+                  <h1 class="title2">Host Your Own events</h1>
+                </div>
+                <div class="layer3">
+                  <h2 class="title3"></h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Blog Header -->
+    <!-- ======= Contact Section ======= -->
+    <div id="contact" class="contact-area">
+      <div class="contact-inner area-padding">
+        <div class="contact-overly"></div>
+        <div class="container ">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="section-headline text-center">
+                <h2>Add Event</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+           
+
+            <!-- Start  contact -->
+            <div class="col-md-6">
+              <div class="form contact-form">
+                <form action="{{form.action|default:request.path}}" method="post" role="form" class="php-email-form">
+       	            {% csrf_token %}
+                    <div class="form-group">
+       	              {{form}}
+                    </div>
+                  <div class="text-center"><button type="submit">Add Event</button></div>
+                </form>
+              </div>
+            </div>
+            <!-- End Left contact -->
+          </div>
+        </div>
+      </div>
+    </div><!-- End Contact Section -->
+
+{% endblock %}

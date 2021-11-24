@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+  <!-- ======= Blog Header ======= -->
+    <div class="header-bg page-area">
+      <div class="container position-relative">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="slider-content text-center">
+              <div class="header-bottom">
+                <div class="layer2">
+                  <h1 class="title2">Pricing Table </h1>
+                </div>
+                <div class="layer3">
+                  <h2 class="title3"></h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Blog Header -->
+    <!-- ======= Pricing Section ======= -->
+    <div id="pricing" class="pricing-area area-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline text-center">
+              <h2></h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          {% for plan in plans %}
+          <div class="col-md-4 col-sm-4 col-xs-12 {% if current_plan %}{% if plan.price <= current_plan.package.price|default:0 %} disabledPlan {% endif %} {% endif %}">
+            <div class="pri_table_list">
+              <h3>{{plan.name}} <br /> <span>${{plan.get_formated_price}}</span></h3>
+              <ol>
+                <li class="check"><i class="bi bi-check"></i><span> for {{plan.active_period_days}} {% if plan.active_period_days > 1 %} days {% else %} day {% endif %}</span></li>
+                <li class="check"><i class="bi bi-x"></i><span>{{plan.events_limit}} Posts at a time</span></li>
+              </ol>
+              <button>
+                {% if current_plan%}
+                {% if plan.price > current_plan.package.price|default:0 %}{% endif %}
+                <a href="{% url 'checkout' pk=plan.pk%}" class="btn upgrade"><i>Upgrade</i>
+                </a>
+                  
+                {%elif plan.pk == current_plan.package.pk %}
+                  Active
+                {% else%}
+                <a href="{% url 'checkout' pk=plan.pk%}" class="btn upgrade"><i>Enroll</i>
+                </a>
+                
+                {% endif %}</button>
+            </div>
+          </div>
+          {% endfor %}
+         
+        </div>
+      </div>  
+    </div><!-- End Pricing Section -->
+
+{% endblock %}    
