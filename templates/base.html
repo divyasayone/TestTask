@@ -50,7 +50,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="{% url 'home' %}">Home</a></li>
           <li><a class="nav-link scrollto" href="{% url 'Events' %}">Events</a></li>
           <li><a class="nav-link scrollto" href="{% url 'payment_plans' %}">Pricing</a></li>
           {% if not request.user.is_authenticated %}

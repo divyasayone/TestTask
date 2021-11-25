@@ -75,52 +75,70 @@
           <!-- Start single blog -->
           <div class="col-md-8 col-sm-8 col-xs-12">
             <div class="row">
-              {% for event in events_list%}
+              {% if events_list%}
+                {% for event in events_list%}
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="single-blog">
+                    <div class="single-blog-img">
+                      <a href="blog-details.html">
+                        
+                        {% if event.promo_picture %}
+                        <img src="{{event.promo_picture.url}}" alt="">
+                        {% else%}
+                        <img src="{% static 'assets/img/blog/1.jpg' %}" alt="">
+                        {% endif %}
+                      </a>
+                    </div>
+                    <div class="blog-meta">
+                      <span class="comments-type">
+                        <i class="bi bi-building"></i>
+                        <a href="#">{{ event.venue}}</a>
+                      </span>
+                      <span class="date-type">
+                        <i class="bi bi-calendar"></i>{{event.scheduled}}
+                      </span>
+                    </div>
+                    <div class="blog-text">
+                      <h4>
+                        <a href="#">{{event.title}}</a>
+                      </h4>
+                      <p>
+                        {{event.description}}
+                      </p>
+                    </div>
+                    <span>
+                      <a href="{% url 'event-detail' pk=event.pk %}" target="blank" class="ready-btn">Read more</a>
+                    </span>
+                  </div>
+                </div>
+                {% endfor %}
+              {% else%}
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="single-blog">
                   <div class="single-blog-img">
                     <a href="blog-details.html">
                       
-                      {% if event.promo_picture %}
-                      <img src="{{event.promo_picture.url}}" alt="">
-                      {% else%}
-                       <img src="{% static 'assets/img/blog/1.jpg' %}" alt="">
-                      {% endif %}
+                    
+                      <img src="{% static 'assets/img/blog/no_content.png' %}" alt="">
+                    
                     </a>
                   </div>
-                  <div class="blog-meta">
-                    <span class="comments-type">
-                      <i class="bi bi-building"></i>
-                      <a href="#">{{ event.venue}}</a>
-                    </span>
-                    <span class="date-type">
-                      <i class="bi bi-calendar"></i>{{event.scheduled}}
-                    </span>
-                  </div>
+                  
                   <div class="blog-text">
                     <h4>
-                      <a href="#">{{event.title}}</a>
+                      <a href="#"></a>
                     </h4>
                     <p>
-                      {{event.description}}
+                      
                     </p>
                   </div>
                   <span>
-                    <a href="{% url 'event-detail' pk=event.pk %}" target="blank" class="ready-btn">Read more</a>
                   </span>
                 </div>
               </div>
-              {% endfor %}
+              {% endif %}
              
-              <!-- <div class="blog-pagination">
-                <ul class="pagination">
-                  <li class="page-item"><a href="#" class="page-link">&lt;</a></li>
-                  <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                  <li class="page-item"><a href="#" class="page-link">2</a></li>
-                  <li class="page-item"><a href="#" class="page-link">3</a></li>
-                  <li class="page-item"><a href="#" class="page-link">&gt;</a></li>
-                </ul>
-              </div> -->
+           
             </div>
           </div>
         </div>

@@ -82,18 +82,50 @@
         <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
 
         <div class="carousel-inner" role="listbox">
-          {% for event in events%}
-          <div class="carousel-item {% if forloop.first %} active {% endif %}"  style="background-image: url({% static 'assets/img/hero-carousel/1.jpg' %})">
-            <div class="carousel-container">
-              <div class="container">
-                <h2 class="animate__animated animate__fadeInDown">{{event.title}} </h2>
-                <p class="animate__animated animate__fadeInUp">{{event.description|truncatechars:30}} @{{event.venue}}</p>
-                <a href="{% url 'Events' %}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Read More</a>
+          {% if events%}
+            {% for event in events%}
+            <div class="carousel-item {% if forloop.first %} active {% endif %}"  style="background-image: url({% static 'assets/img/hero-carousel/1.jpg' %})">
+              <div class="carousel-container">
+                <div class="container">
+                  <h2 class="animate__animated animate__fadeInDown">{{event.title}} </h2>
+                  <p class="animate__animated animate__fadeInUp">{{event.description|truncatechars:30}} <br /><i class="bi bi-geo-alt"></i>{{event.venue}}</p>
+                  <a href="{% url 'Events' %}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Read More</a>
 
+                </div>
               </div>
             </div>
-          </div>
-          {% endfor %}
+            {% endfor %}
+          {% else %}
+            <div class="carousel-item" style='background-image: url({% static "assets/img/hero-carousel/1.jpg" %})'>
+              <div class="carousel-container">
+                <div class="container">
+                  <h2 class="animate__animated animate__fadeInDown">The Best Business Information </h2>
+                  <p class="animate__animated animate__fadeInUp">We're In The Business Of Helping You Start Your Business</p>
+                  <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item active carousel-item-start" style='background-image: url({% static "assets/img/hero-carousel/2.jpg" %})'>
+              <div class="carousel-container">
+                <div class="container">
+                  <h2 class="animate__animated animate__fadeInDown">At vero eos et accusamus</h2>
+                  <p class="animate__animated animate__fadeInUp">Helping Business Security &amp; Peace of Mind for Your Family</p>
+                  <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item carousel-item-next carousel-item-start" style="background-image: url({% static 'assets/img/hero-carousel/3.jpg' %})">
+              <div class="carousel-container">
+                <div class="container">
+                  <h2 class="animate__animated animate__fadeInDown">Temporibus autem quibusdam</h2>
+                  <p class="animate__animated animate__fadeInUp">Beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem</p>
+                  <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+                </div>
+              </div>
+            </div>
+          {% endif %}
           
 
         </div>
