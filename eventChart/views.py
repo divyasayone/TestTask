@@ -46,12 +46,12 @@ class EventListView(View):
 	template_name	=	'events/event_list.html'
 
 	def get_context_data(self):
-		events = EventList.objects.filter(is_active=True, scheduled__gte = datetime.now())
+		events = EventList.objects.filter(is_active=True, scheduled_from__gte = datetime.now())
 		return events
 
 	def get(self, request):
 		context = {
-					'events_list' : self.get_context_data().order_by('scheduled'),
+					'events_list' : self.get_context_data().order_by('scheduled_from'),
 					'recent_list'	:	self.get_context_data().order_by('-created')
 					}
 		return render(request, self.template_name, context)
@@ -66,12 +66,12 @@ class MyEventListview(View):
 	context = {}
 	
 	def get_context_data(self):
-		events = EventList.objects.filter(scheduled__gte = datetime.now(), owner = self.request.user)
+		events = EventList.objects.filter(scheduled_from__gte = datetime.now(), owner = self.request.user)
 		return events
 
 	def get(self, request, pk=None):
 		self.context = {
-					'myevents' : self.get_context_data().order_by('scheduled'),
+					'myevents' : self.get_context_data().order_by('scheduled_from'),
 					}
 		return render(request, self.template_name, self.context)
 
@@ -97,7 +97,7 @@ class ManageEventPublish(View):
 		current_plan = PlanPurchaseHistory.objects.filter(owner = request.user,
 															is_active=True,
 															expiry_date__gte=datetime.now()).last()
-		active_events = EventList.objects.filter(is_active=True, scheduled__gte = datetime.now())
+		active_events = EventList.objects.filter(is_active=True, scheduled_from__gte = datetime.now())
 		pending_scope = 0
 		if current_plan :
 			pending_scope = current_plan.package.events_limit - active_events.count()

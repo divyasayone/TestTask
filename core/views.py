@@ -12,7 +12,7 @@ class IndexView(View):
 	template_name = 'index.html'
 	
 	def get_context_data(self):
-		events = EventList.objects.filter(is_active=True, scheduled__gte = datetime.now()).order_by('created')[:3]
+		events = EventList.objects.filter(is_active=True, scheduled_from__gte = datetime.now()).order_by('created')[:3]
 		return events
 
 	def get(self, request):

@@ -81,7 +81,7 @@ class CreateCheckoutSessionView(View):
             metadata =	{
             	'package_plan': plan.id,
             	'active_period_days': plan.active_period_days,
-              'user_id': request.user.id,
+              	'user_id': request.user.id,
             },
             customer_email = request.user.email,  
             mode = 'payment',
