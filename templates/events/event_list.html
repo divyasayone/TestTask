@@ -95,7 +95,7 @@
                         <a href="#">{{ event.venue}}</a>
                       </span>
                       <span class="date-type">
-                        <i class="bi bi-calendar"></i>{{event.scheduled_from}}
+                        <i class="bi bi-calendar"></i>{{event.scheduled_from}} {% if event.scheduled_to %}- {{event.scheduled_to}} {% endif %}
                       </span>
                     </div>
                     <div class="blog-text">

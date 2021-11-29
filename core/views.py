@@ -20,3 +20,17 @@ class IndexView(View):
 					'events' : self.get_context_data()
 					}
 		return render(request, self.template_name, context)
+
+class TestView(View):
+	template_name = 'test.html'
+	context = {}
+	
+	def get(self, request):
+
+
+		from payment import tasks as t
+		t.DeactivatePurchasePlanAfterExpiry()
+
+
+
+		return render(request, self.template_name, self.context)

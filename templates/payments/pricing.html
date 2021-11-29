@@ -41,16 +41,15 @@
                 <li class="check"><i class="bi bi-x"></i><span>{{plan.events_limit}} Posts at a time</span></li>
               </ol>
               <button>
-                {% if current_plan%}
-                {% if plan.price > current_plan.package.price|default:0 %}{% endif %}
-                <a href="{% url 'checkout' pk=plan.pk%}" class="btn upgrade"><i>Upgrade</i>
-                </a>
-                  
-                {%elif plan.pk == current_plan.package.pk %}
-                  Active
-                {% else%}
-                <a href="{% url 'checkout' pk=plan.pk%}" class="btn upgrade"><i>Enroll</i>
-                </a>
+                  {% if current_plan and  plan.price > current_plan.package.price|default:0 %}
+                  <a href="{% url 'checkout' pk=plan.pk%}" class="btn upgrade"><i>Upgrade</i>
+                  </a>
+                  {%elif plan.pk == current_plan.package.pk %}
+                  <a href="{% url 'checkout' pk=plan.pk%}" class="btn upgrade"><i>Active</i>
+                  </a>
+                  {% else%}
+                  <a href="{% url 'checkout' pk=plan.pk%}" class="btn upgrade"><i>Enroll</i>
+                  </a>
                 
                 {% endif %}</button>
             </div>
