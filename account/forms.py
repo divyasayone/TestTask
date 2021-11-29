@@ -30,13 +30,12 @@ class RegisterForm(forms.ModelForm):
     The default 
 
     """
-
+    email = forms.EmailField(label=_("Email"), max_length=254, widget=forms.EmailInput)
     password = forms.CharField(widget=forms.PasswordInput)
     # password_2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        # fields = ['email']s
         fields = ["email", "password", "first_name", "last_name"]
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
@@ -124,7 +123,8 @@ class AuthenticationForm(forms.Form):
     Base class for authenticating users. Extend this to get a form that accepts
     username/password logins.
     """
-    username = forms.CharField(max_length=254,widget=forms.TextInput(attrs={'class':'form-control'}))
+    username    = forms.EmailField(label=_("Email"), max_length=254, widget=forms.EmailInput(attrs={'class':'form-control'}))
+    # username = forms.CharField(max_length=254,widget=forms.TextInput(attrs={'class':'form-control'}))
     password = forms.CharField(label=_("Password"), widget=forms.PasswordInput(attrs={'class':'form-control'}))
 
     error_messages = {

@@ -35,64 +35,70 @@
           </div>
         </div>
         <div class="row">
-          {% for myevent in myevents %}
-          <div class="col-md-3 col-sm-3 col-xs-12 my_event_{{myevent.pk}}">
-            <div class="single-team-member">
-              <div class="team-img">
-                <a href="#">
-                  {% if myevent.promo_picture %}
-                    <img src="{{myevent.promo_picture.url}}" alt="">
-                  {% else%}
-                    <img src="{% static 'assets/img/blog/1.jpg' %}" alt="">
-                  {% endif %}
-                </a>
-                <div class="team-social-icon text-center">
-                  {% if myevent.is_active  %}
-                  <p  class="event_activation_status_{{myevent.id}} fade_bg"> published</p>
-                  {% else %}
-                  <p  class="event_activation_status_{{myevent.id}} fade_bg"> unpublished</p>
-                  {% endif %}
-
-                  <ul>
-                    {% if not myevent.is_active  %}
-                    <li>
-                      <a href="{% url 'publishevent' pk=myevent.pk %}" event_action="publish" class="event_activation" event_id={{myevent.pk}} >
-                        <i class="bi bi-lightbulb"></i>
-                      </a>
-                    </li>
-                    {% else %}
-                    <li>
-                      <a href="{% url 'unpublishevent' pk=myevent.pk %}" event_action="unpublish" class="event_activation" event_id={{myevent.pk}}>
-                        <i class="bi bi-lightbulb-off-fill"></i>
-                      </a>
-                    </li>
+          {% if myevents %}
+            {% for myevent in myevents %}
+            <div class="col-md-3 col-sm-3 col-xs-12 my_event_{{myevent.pk}}">
+              <div class="single-team-member">
+                <div class="team-img">
+                  <a href="#">
+                    {% if myevent.promo_picture %}
+                      <img src="{{myevent.promo_picture.url}}" alt="">
+                    {% else%}
+                      <img src="{% static 'assets/img/blog/1.jpg' %}" alt="">
                     {% endif %}
-                    <li>
-                      <a href="{% url 'event-detail' pk=myevent.pk %}" target="blank">
-                        <i class="bi bi-eye-fill"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{% url 'editEvents' pk=myevent.pk %}">
-                       <i class="bi bi-pencil-square"></i>                       
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{% url 'deletemyevent' pk=myevent.pk %}" class="delete_event" event_id="{{myevent.id}}">
-                       <i class="bi bi-trash"></i>                       
-                      </a>                       
-                    </li>
-                  </ul>
+                  </a>
+                  <div class="team-social-icon text-center">
+                    {% if myevent.is_active  %}
+                    <p  class="event_activation_status_{{myevent.id}} fade_bg"> published</p>
+                    {% else %}
+                    <p  class="event_activation_status_{{myevent.id}} fade_bg"> unpublished</p>
+                    {% endif %}
+
+                    <ul>
+                      {% if not myevent.is_active  %}
+                      <li>
+                        <a href="{% url 'publishevent' pk=myevent.pk %}" event_action="publish" class="event_activation" event_id={{myevent.pk}} >
+                          <i class="bi bi-lightbulb"></i>
+                        </a>
+                      </li>
+                      {% else %}
+                      <li>
+                        <a href="{% url 'unpublishevent' pk=myevent.pk %}" event_action="unpublish" class="event_activation" event_id={{myevent.pk}}>
+                          <i class="bi bi-lightbulb-off-fill"></i>
+                        </a>
+                      </li>
+                      {% endif %}
+                      <li>
+                        <a href="{% url 'event-detail' pk=myevent.pk %}" target="blank">
+                          <i class="bi bi-eye-fill"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="{% url 'editEvents' pk=myevent.pk %}">
+                        <i class="bi bi-pencil-square"></i>                       
+                        </a>
+                      </li>
+                      <li>
+                        <a href="{% url 'deletemyevent' pk=myevent.pk %}" class="delete_event" event_id="{{myevent.id}}">
+                        <i class="bi bi-trash"></i>                       
+                        </a>                       
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="team-content text-center">
+                  <h4>{{myevent.title|slice:15}}..</h4>
+                  <p>{{myevent.scheduled_from}}</p>
+                  <p>{{myevent.venue|slice:20}}</p>
                 </div>
               </div>
-              <div class="team-content text-center">
-                <h4>{{myevent.title|slice:15}}..</h4>
-                <p>{{myevent.scheduled_from}}</p>
-                <p>{{myevent.venue|slice:20}}</p>
-              </div>
             </div>
-          </div>
-          {% endfor %}
+            {% endfor %}
+          {% else %}
+            <div class="col-md-12 text-center ">
+              <img src="{% static 'assets/img/blog/no_content.png' %}" alt="">
+            </div>             
+          {% endif %}
           <!-- End column -->
          
           
