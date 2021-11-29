@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.hashers import (
     UNUSABLE_PASSWORD_PREFIX, identify_hasher,
 )
+from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
@@ -32,16 +33,17 @@ class RegisterForm(forms.ModelForm):
     """
     email = forms.EmailField(label=_("Email"), max_length=254, widget=forms.EmailInput)
     password = forms.CharField(widget=forms.PasswordInput)
-    # password_2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
         model = User
         fields = ["email", "password", "first_name", "last_name"]
+
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
         
         for k in self.visible_fields():
             k.field.widget.attrs['class'] = 'form-control'
+
     def clean_email(self):
         '''
         Verify email is available.
@@ -51,17 +53,11 @@ class RegisterForm(forms.ModelForm):
         if qs.exists():
             raise forms.ValidationError("email is taken")
         return email
-
-    def clean(self):
-        '''
-        Verify both passwords match.
-        '''
-        cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        # password_2 = cleaned_data.get("password_2")
-        # if password is not None and password != password_2:
-        #     self.add_error("password_2", "Your passwords must match")
-        return cleaned_data
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        validate_password(password)
+        return password
+   
 
     def save(self):
         user = super().save(commit=False)

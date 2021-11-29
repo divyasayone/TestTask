@@ -51,15 +51,15 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="{% url 'home' %}">Home</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'Events' %}">Events</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'eventslist' %}">Events</a></li>
           <li><a class="nav-link scrollto" href="{% url 'payment_plans' %}">Pricing</a></li>
           {% if not request.user.is_authenticated %}
           <li><a class="nav-link scrollto" href="{% url 'signin' %}">Explore</a></li>
           {% else %}
           <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="{% url 'newEvents' %}">Add Event</a></li>
-              <li><a href="{% url 'myeventlist' %}">Manage Events</a></li>
+              <li><a href="{% url 'newevent' %}">Add Event</a></li>
+              <li><a href="{% url 'myevents' %}">Manage Events</a></li>
               <li><a href="{% url 'logout' %}">SignOut</a></li>
             </ul>
           </li>  
@@ -80,15 +80,13 @@
 
 
 
+
     {% block content %}
     {% endblock %}
 
 
 
- 
-
-
-
+    
 
 
 
@@ -198,11 +196,7 @@
   <!-- Template Main JS File -->
   <script src="{% static "assets/js/main.js" %}"></script>
 
-  {% if messages %}
-  {% for message in messages %}
-      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
-  {% endfor %}
-{% endif %}
+ 
 </body>
 
 </html>

@@ -4,7 +4,7 @@ from datetime import datetime
 from account.models import User
 # Create your models here.
 
-class Plans(models.Model):
+class Plan(models.Model):
 	name	=	models.CharField(max_length=100)
 	details	=	models.TextField(blank=True,null=True)
 	price	=	models.IntegerField(default=1000) # in cents
@@ -19,7 +19,7 @@ class Plans(models.Model):
 		return "{0:.2f}".format( self.price / 100 )
 
 class PlanPurchaseHistory(models.Model):
-	package	=	models.ForeignKey(Plans, on_delete = models.CASCADE, verbose_name = 'package')
+	package	=	models.ForeignKey(Plan, on_delete = models.CASCADE, verbose_name = 'package')
 	owner	=	models.ForeignKey(User, on_delete = models.CASCADE, verbose_name = 'owner' , unique = True)
 	purchase_date	=	models.DateTimeField(default=datetime.now, blank=True)
 	expiry_date	=	models.DateTimeField(default=datetime.now, blank=True)

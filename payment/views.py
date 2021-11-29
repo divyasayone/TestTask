@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views import View
+from django.views import View,generic
 from django.shortcuts import render, redirect, reverse
 from datetime import datetime,timedelta
 from django.utils.decorators import method_decorator
@@ -9,50 +9,45 @@ import stripe
 from django.conf import settings
 from django.views.generic import TemplateView
 
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.views.decorators.csrf import csrf_exempt
+from account import models
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 DOMAIN = settings.YOUR_DOMAIN
 endpoint_secret = settings.WEBHOOK_SECRET_KEY
 
 # from payments.forms import (EventAddForm)
-from payment.models import (Plans,PlanPurchaseHistory)
+from payment.models import (Plan,PlanPurchaseHistory)
 ## to add new  evemts 
  
 @method_decorator(login_required(login_url='/account/signin/'), name='dispatch')
-class PlansListView(View):
-	# form_class = EventAddForm
+class PlanListView(generic.ListView):
+	model = Plan
 	template_name = 'payments/pricing.html'
-	success_url = 'newEvents'
-	context = {}
-
-	def get(self, request):
-		plans = Plans.objects.all().order_by('price')
+	context_object_name = 'plans'	
+	
+	def get_queryset(self):
+		plans = Plan.objects.all().order_by('price')
+		return plans
+	
+	def get_context_data(self, **kwargs):
+		context = super(PlanListView, self).get_context_data(**kwargs)
 		current_plan	=	PlanPurchaseHistory.objects.filter(
-			owner = request.user,
+			owner = self.request.user,
 			is_active=True,
 			expiry_date__gt = datetime.now()).first()
-		self.context = {
-			'plans' : plans,
-			'current_plan' : current_plan,
+		context['current_plan'] = current_plan
+		return context
 
-		}
-		return render(request, self.template_name, self.context)
+	
 
 
 @method_decorator(login_required(login_url='/account/signin/'), name='dispatch')
-class PlanCheckOutView(View):
+class PlanCheckOutView(generic.DetailView):
 	template_name = 'payments/checkout.html'
-	context	=	{}
-	instance	=	None
-	
-	def get(self, request, pk=None):
-		self.instance	=	Plans.objects.filter(pk=pk).first()
-		self.context = {
-			'choosen_plan'	:	self.instance
-		}
-		return render(request, self.template_name, self.context)
+	model = Plan
+	context_object_name = 'choosen_plan'
 
 
 '''
@@ -63,7 +58,7 @@ class PlanCheckOutView(View):
 @method_decorator(login_required(login_url='/account/signin/'), name='dispatch')
 class CreateCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
-        plan = Plans.objects.get(id=self.kwargs["pk"])
+        plan = Plan.objects.get(id=self.kwargs["pk"])
         YOUR_DOMAIN = DOMAIN
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
@@ -85,8 +80,8 @@ class CreateCheckoutSessionView(View):
             },
             customer_email = request.user.email,  
             mode = 'payment',
-            success_url = YOUR_DOMAIN + '/payments/plans/',
-            cancel_url = YOUR_DOMAIN + '/cancel/',
+            success_url = YOUR_DOMAIN + '/payments/stripe/status/success/',
+            cancel_url = YOUR_DOMAIN + '/payments/stripe/status/cancel/',
         )
         return redirect(checkout_session.url)
 
@@ -143,10 +138,14 @@ def fulfill_order(session):
 								}
 							)
 	
-	# TODO: fill me in
-	print("Fulfilling order")
 	# Passed signature verification
 
 class StripeCancelView(TemplateView):
 	template_name =	"payments/stripe_cancel.html"
 
+class StripeSuccessView(TemplateView):
+	template_name = "payments/success.html"
+	def get_context_data(self, **kwargs):
+		context = super(StripeSuccessView, self).get_context_data(**kwargs)
+		context['user'] = self.request.user
+		return context

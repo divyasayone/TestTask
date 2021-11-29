@@ -19,7 +19,7 @@ from account.forms import (AuthenticationForm,RegisterForm)
 '''
 class UserLoginView(View):
 	form_class = AuthenticationForm
-	success_url  = 'Events'
+	success_url  = 'eventslist'
 	template_name 	=	'account/login.html'
 
 	def get(self, request):

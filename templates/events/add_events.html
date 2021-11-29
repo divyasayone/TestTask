@@ -37,14 +37,14 @@
               </div>
             </div>
           </div>
+          {% include 'messages.html' %}
           <div class="row">
 
            
-
             <!-- Start  contact -->
             <div class="col-md-6">
               <div class="form contact-form">
-                <form action="{{form.action|default:request.path}}" method="post" role="form" class="php-email-form">
+                <form action="{{form.action|default:request.path}}" method="post" role="form" class="php-email-form" enctype="multipart/form-data">
        	            {% csrf_token %}
                     <div class="form-group">
        	              {{form}}

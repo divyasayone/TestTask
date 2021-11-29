@@ -3,7 +3,7 @@ from django.views import View
 from django.shortcuts import render, redirect, reverse
 from datetime import datetime
 
-from eventChart.models import (EventList)
+from eventChart.models import (Event)
 # Create your views here.
 
 
@@ -12,7 +12,7 @@ class IndexView(View):
 	template_name = 'index.html'
 	
 	def get_context_data(self):
-		events = EventList.objects.filter(is_active=True, scheduled_from__gte = datetime.now()).order_by('created')[:3]
+		events = Event.objects.filter(is_published=True, scheduled_from__gte = datetime.now()).order_by('created')[:3]
 		return events
 
 	def get(self, request):

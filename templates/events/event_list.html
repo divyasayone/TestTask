@@ -41,6 +41,25 @@
                 </form>
                 <!-- search option end -->
               </div>
+              
+              <div class="single-blog-page">
+                <div class="left-tags blog-tags">
+                  <div class="popular-tag left-side-tags left-blog">
+                    <h4>categories</h4>
+                    <ul>
+                      <li>
+                        <a href="{% url 'eventslist' %}">all</a>
+                      </li>
+                      {% for category in categories %}
+                      <li>
+                        <a href="{% url 'eventslist' %}?filter={{category.name}}">{{category.name}}</a>
+                      </li>
+                     {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
               <div class="single-blog-page">
                 <!-- recent start -->
                 <div class="left-blog">
@@ -68,7 +87,7 @@
                 </div>
                 <!-- recent end -->
               </div>
-    
+              
             </div>
           </div>
           <!-- End left sidebar -->
@@ -137,7 +156,32 @@
                 </div>
               </div>
               {% endif %}
-             
+              
+              {% block pagination %}
+                {% if is_paginated %}
+                  <div class="blog-pagination">
+                      <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                              <li class="page-item">
+                                <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" class="page-link">previous</a>
+                              </li>
+                            {% endif %}
+                            <li class="page-item active">
+                              <a class="page-link">
+                                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                              </a>
+                            </li>
+                            {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a href="{{ request.path }}?page={{ page_obj.next_page_number }}" class="page-link">next</a>
+                            </li>
+                            {% endif %}
+                          </ul>
+                    </div>
+                {% endif %}
+                {% endblock %}  
+                
+                 
            
             </div>
           </div>
@@ -147,4 +191,9 @@
 
   </main><!-- End #main -->
 
+
+
+
+
   {% endblock %}
+

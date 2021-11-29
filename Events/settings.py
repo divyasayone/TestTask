@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from typing import cast
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -147,3 +148,5 @@ STRIPE_PUBLISH_KEY = config('STRIPE_PUBLISH_KEY')
 STRIPE_SECRET_KEY   =   config('STRIPE_SECRET_KEY')
 WEBHOOK_SECRET_KEY  =   config('WEBHOOK_SECRET_KEY')
 YOUR_DOMAIN =   config('YOUR_DOMAIN')
+PAGINATION_LIMIT = config('PAGINATION_LIMIT', cast=int, default=2)
+EVENT_PAGINATION_LIMIT = config('EVENT_PAGINATION_LIMIT', cast=int, default=10)

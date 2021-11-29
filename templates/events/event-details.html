@@ -35,44 +35,44 @@
                 <!-- single-blog start -->
                 <article class="blog-post-wrapper">
                   <div class="post-thumbnail">
-                    {% if myevent.promo_picture %}
-                    <img src="{{myevent.promo_picture.url}}" alt="">
+                    {% if event.promo_picture %}
+                    <img src="{{event.promo_picture.url}}" alt="">
                   {% else%}
                     <img src="{% static 'assets/img/blog/1.jpg' %}" alt="">
                   {% endif %}
                   </div>
                   <div class="post-information">
-                    <h2>{{eventlist.title}}</h2>
+                    <h2>{{event.title}}</h2>
                     <div class="entry-meta">
-                      <span class="author-meta"><i class="bi bi-person"></i> <a href="#">{{eventlist.venue }}</a></span>
-                      <span><i class="bi bi-clock"></i> {{eventlist.scheduled_from}} {% if eventlist.scheduled_to %}- {{eventlist.scheduled_to}} {% endif %}</span>
+                      <span class="author-meta"><i class="bi bi-person"></i> <a href="#">{{event.venue }}</a></span>
+                      <span><i class="bi bi-clock"></i> {{event.scheduled_from}} {% if event.scheduled_to %}- {{event.scheduled_to}} {% endif %}</span>
                       <span class="tag-meta">
                         <i class="bi bi-telephone"></i>
-                        <a href="#">{{eventlist.contact_number}}</a>                        
+                        <a href="#">{{event.contact_number}}</a>                        
                       </span>
                       <span>
                         <i class="bi bi-envelope"></i>
-                        <a href="#">{{eventlist.contact_email}}</a>
+                        <a href="#">{{event.contact_email}}</a>
                       </span>
                     </div>
                     <div class="entry-content">
-                      <p>{{eventlist.description}}</p>
+                      <p>{{event.description}}</p>
                       <blockquote>
-                        <p><a href="{{eventlist.reference}}">reference</a></p>
+                        <p><a href="{{event.reference}}">reference</a></p>
                       </blockquote>
-                      <p>{{eventlist.more_info }}</p>
+                      <p>{{event.more_info }}</p>
                     </div>
                   </div>
                 </article>
                 <div class="clear"></div>
                 
-                <!-- single-blog end -->
+               
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div><!-- End Blog Page -->
+    </div>
 
 
 {% endblock %}
