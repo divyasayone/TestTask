@@ -90,10 +90,11 @@ class EventListView(generic.ListView):
 
 	def get_context_data(self, **kwargs):
 		context = super(EventListView, self).get_context_data(**kwargs)
-		if 'Event_list' in context and context['Event_list']:
-			context['events_list'] = context['Event_list']
-			context['recent_list'] = context['Event_list'][::-1]
+		if 'event_list' in context and context['event_list']:
+			context['events_list'] = context['event_list']
+			context['recent_list'] = context['event_list'][::-1]
 			context['categories'] = EventCategory.objects.all()
+		return context
 	
 
 class EventDetailView(generic.DetailView):
