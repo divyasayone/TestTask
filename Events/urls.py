@@ -19,16 +19,16 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 
-import core.views
+import applications.core.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('account/', include('account.urls')),
-    path('',include('core.urls')),
-    path('event/',include('eventChart.urls')),
-    path('payments/', include('payment.urls')),
+    path('account/', include('applications.account.urls')),
+    path('',include('applications.core.urls')),
+    path('event/',include('applications.eventChart.urls')),
+    path('payments/', include('applications.payment.urls')),
 ]
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,
                               document_root=settings.MEDIA_ROOT)
-urlpatterns += url(r'^$',core.views.IndexView.as_view()),
+urlpatterns += url(r'^$',applications.core.views.IndexView.as_view()),

@@ -41,11 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'celery',
     # custom apps
-    'account',
-    'core',
-    'eventChart',
-    'payment',
+    'applications.account',
+    'applications.core',
+    'applications.eventChart',
+    'applications.payment',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +152,14 @@ WEBHOOK_SECRET_KEY  =   config('WEBHOOK_SECRET_KEY')
 YOUR_DOMAIN =   config('YOUR_DOMAIN')
 PAGINATION_LIMIT = config('PAGINATION_LIMIT', cast=int, default=2)
 EVENT_PAGINATION_LIMIT = config('EVENT_PAGINATION_LIMIT', cast=int, default=10)
+
+
+
+# celery and redis
+
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Africa/Nairobi'
