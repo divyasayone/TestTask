@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    
+    'django.contrib.staticfiles',     
     'celery',
     # custom apps
     'applications.account',
@@ -142,14 +141,14 @@ AUTH_USER_MODEL = 'account.User'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-MEDIA_URL='/media/'
+MEDIA_URL = '/media/'
 
-MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 STRIPE_PUBLISH_KEY = config('STRIPE_PUBLISH_KEY')
-STRIPE_SECRET_KEY   =   config('STRIPE_SECRET_KEY')
-WEBHOOK_SECRET_KEY  =   config('WEBHOOK_SECRET_KEY')
-YOUR_DOMAIN =   config('YOUR_DOMAIN')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+WEBHOOK_SECRET_KEY = config('WEBHOOK_SECRET_KEY')
+YOUR_DOMAIN = config('YOUR_DOMAIN')
 PAGINATION_LIMIT = config('PAGINATION_LIMIT', cast=int, default=2)
 EVENT_PAGINATION_LIMIT = config('EVENT_PAGINATION_LIMIT', cast=int, default=10)
 

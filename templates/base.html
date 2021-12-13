@@ -73,32 +73,17 @@
     </div>
   </header><!-- End Header -->
 
-
-
-    {% if is_index_view %}
-
-       {% include 'index.html' %}
-
-    {% endif %}
-
-
+  <!-- ======= incling index only loading home page  ======= -->
+  {% if is_index_view %}
+      {% include 'index.html' %}
+  {% endif %}
+  <!-- End including home page -->
 
   <main id="main">
-
-
-
-
-
     {% block content %}
+    <!-- ======= extends content here ======= -->
     {% endblock %}
-
-
-
-    
-
-
-
-  </main><!-- End #main -->
+  </main>
 
   <!-- ======= Footer ======= -->
   <footer>

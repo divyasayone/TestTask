@@ -25,7 +25,6 @@ class AddEventView(SuccessMessageMixin,generic.CreateView):
 	template_name = 'events/add_events.html'
 	success_url = reverse_lazy('newevent')
 	success_message = "Added successfully"
-
 	
 	def form_valid(self, form):
 		form.instance.owner = self.request.user
@@ -80,12 +79,15 @@ class EventListView(generic.ListView):
 
 	def get_queryset(self):
 		filter_val = self.request.GET.get('filter', None)
+		search_val = self.request.GET.get('search', None)
 		order = self.request.GET.get('orderby', 'scheduled_from')
 		events = Event.objects.filter(is_published=True,
 										scheduled_from__gte = datetime.now(),
 										).order_by(order)
 		if filter_val:
 			events = events.filter(category__name = filter_val)
+		if search_val:
+			events = events.filter(name__icontains=search_val)
 		return	events
 
 	def get_context_data(self, **kwargs):
@@ -163,3 +165,17 @@ class ManageEventPublish(generic.UpdateView):
 				}
 
 		return JsonResponse(self.context)
+
+from dal import autocomplete
+class CategoryNameAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        # if not self.request.user.is_authenticated:
+        #     return EventCategory.objects.none()
+
+        qs = EventCategory.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs

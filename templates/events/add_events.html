@@ -3,6 +3,11 @@
 
 {% block content %}
 
+<script type="text/javascript" src="http://dal-yourlabs.rhcloud.com/static/collected/admin/js/vendor/jquery/jquery.js"></script>
+<link src="/static/collected/autocomplete_light/vendor/select2/dist/css/select2.css" type="text/css" media="all" rel="stylesheet" />
+<link src="/static/collected/autocomplete_light/select2.css" type="text/css" media="all" rel="stylesheet" />
+<script type="text/javascript" src="/static/collected/autocomplete_light/autocomplete.init.js"></script>
+<script type="text/javascript" src="/static/collected/autocomplete_light/select2.js"></script> 
   
 
 
@@ -24,8 +29,9 @@
           </div>
         </div>
       </div>
-    </div><!-- End Blog Header -->
-    <!-- ======= Contact Section ======= -->
+    </div>
+  <!-- End Blog Header -->
+  <!-- ======= add event Section ======= -->
     <div id="contact" class="contact-area">
       <div class="contact-inner area-padding">
         <div class="contact-overly"></div>
@@ -39,24 +45,22 @@
           </div>
           {% include 'core/messages.html' %}
           <div class="row">
-
-           
-            <!-- Start  contact -->
             <div class="col-md-6">
               <div class="form contact-form">
                 <form action="{{form.action|default:request.path}}" method="post" role="form" class="php-email-form" enctype="multipart/form-data">
        	            {% csrf_token %}
                     <div class="form-group">
-       	              {{form}}
+       	              {{form.as_p}}
                     </div>
                   <div class="text-center"><button type="submit">Add Event</button></div>
                 </form>
               </div>
             </div>
-            <!-- End Left contact -->
           </div>
         </div>
       </div>
-    </div><!-- End Contact Section -->
-
+    </div>
+<!-- End add event Section -->
+    
+    
 {% endblock %}

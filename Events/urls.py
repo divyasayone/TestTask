@@ -24,11 +24,10 @@ import applications.core.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('applications.account.urls')),
-    path('',include('applications.core.urls')),
-    path('event/',include('applications.eventChart.urls')),
+    path('', include('applications.core.urls')),
+    path('event/', include('applications.eventChart.urls')),
     path('payments/', include('applications.payment.urls')),
 ]
 if settings.DEBUG:
-        urlpatterns += static(settings.MEDIA_URL,
-                              document_root=settings.MEDIA_ROOT)
-urlpatterns += url(r'^$',applications.core.views.IndexView.as_view()),
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += url(r'^$', applications.core.views.IndexView.as_view()),

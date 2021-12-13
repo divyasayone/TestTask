@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect, reverse
 from datetime import datetime
 
 from applications.eventChart.models import (Event)
+from applications.payment import tasks as t
+
 # Create your views here.
 
 
@@ -17,21 +19,16 @@ class IndexView(View):
 
 	def get(self, request):
 		context = {
-					'events' : self.get_context_data(),
-					'is_index_view' : True,
+					'events': self.get_context_data(),
+					'is_index_view': True,
 					}
 		return render(request, self.template_name, context)
 
 class TestView(View):
+
 	template_name = 'core/test.html'
 	context = {}
-	
+
 	def get(self, request):
-
-
-		from payment import tasks as t
 		t.DeactivatePurchasePlanAfterExpiry()
-
-
-
 		return render(request, self.template_name, self.context)

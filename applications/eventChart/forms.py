@@ -3,6 +3,8 @@ from collections import OrderedDict
 from datetime import datetime
 from applications.eventChart.models import Event
 
+from dal import autocomplete
+
 '''
     events addinmg and updating form
 '''
@@ -12,8 +14,9 @@ class EventAddForm(forms.ModelForm):
         model = Event
         fields = '__all__'
         widgets = {
-                    'scheduled_from' : forms.DateInput( attrs={ 'placeholder':'Select a date', 'type':'datetime-local'}),
-                    'scheduled_to' : forms.DateInput( attrs={ 'placeholder':'Select a date', 'type':'datetime-local'}),
+                    # 'category' :    autocomplete.ModelSelect2(url='category-autocomplete'),
+                    'scheduled_from': forms.DateInput(attrs={'placeholder': 'Select a date', 'type': 'datetime-local'}),
+                    'scheduled_to': forms.DateInput(attrs={'placeholder': 'Select a date', 'type': 'datetime-local'}),
                 }
         labels = {
                 "scheduled_to": "Scheduled upto (optional)",
@@ -34,7 +37,7 @@ class EventAddForm(forms.ModelForm):
         scheduled_date = cleaned_data.get('scheduled_from',None)
         scheduled_to = cleaned_data.get('scheduled_to', None)
         category = cleaned_data.get('category', None)
-        if not category :
+        if not category:
             raise forms.ValidationError({'category': 'Choose an option'})
         if scheduled_date and scheduled_date.replace(tzinfo=None) < datetime.now():
             raise forms.ValidationError({'scheduled_from': 'Enter a furutre date'})

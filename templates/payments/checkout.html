@@ -2,75 +2,70 @@
 {% block content %}
 
 
-  <!-- ======= Blog Header ======= -->
-    <div class="header-bg page-area">
-      <div class="container position-relative">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="slider-content text-center">
-              <div class="header-bottom">
-                <div class="layer2">
-                  <h1 class="title2">Package CheckOut </h1>
-                </div>
-                <div class="layer3">
-                  <h2 class="title3"></h2>
-                </div>
+<!-- ======= Blog Header ======= -->
+  <div class="header-bg page-area">
+    <div class="container position-relative">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="slider-content text-center">
+            <div class="header-bottom">
+              <div class="layer2">
+                <h1 class="title2">Package CheckOut </h1>
+              </div>
+              <div class="layer3">
+                <h2 class="title3"></h2>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div><!-- End Blog Header -->
-    <!-- ======= Pricing Section ======= -->
-    <div id="pricing" class="pricing-area area-padding">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="section-headline text-center">
-              <h2></h2>
-            </div>
+    </div>
+  </div><!-- End Blog Header -->
+  <!-- ======= Pricing Section ======= -->
+  <div id="pricing" class="pricing-area area-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="section-headline text-center">
+            <h2></h2>
           </div>
-        </div>
-        <div class="row">
-         
-
-          <div class="col-md-8 col-sm-8 col-xs-12 {% if plan.price <= current_plan.package.price|default:0 %} disabledPlan {% endif %} ">
-            <div class="pri_table_list">
-              <h3> CheckOut<br/> 
-                <span>{{choosen_plan.name}}- Plan</span>
-              </h3>
-              <ol>
-                <li class="check">
-                    <span class="col-md-6 col-sm-6 col-xs-6">Plan </span>
-                    <span class="col-sm-4 "> {{choosen_plan.name}}<span>
-                </li>
-                <li class="check">
-                  <span class="col-md-6 col-sm-6 col-xs-6"> Basic Price</span>
-                  <span class="col-md-4 ">  ${{choosen_plan.get_formated_price}} <span>
-                </li>
-                <li class="check">
-                  <span class="col-md-6 col-sm-6 col-xs-6"> Extra Charge</span>
-                  <span class="col-md-4 ">  $0.00 <span>
-                </li>
-                <li class="check">
-                  <span class="col-md-6 col-sm-6 col-xs-6"> Total </span>
-                  <span class="col-md-4 "> ${{choosen_plan.get_formated_price}} <span>
-                </li>
-              </ol>
-              <form action="{% url 'create-checkout-session' choosen_plan.id %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit">Checkout</button>
-              </form>
-             <!--  <button>
-               
-                  CheckOut
-
-                </button> -->
-            </div>
-          </div>
-         
         </div>
       </div>
-    </div><!-- End Pricing Section -->
+      <div class="row">
+        
+
+        <div class="col-md-8 col-sm-8 col-xs-12 {% if plan.price <= current_plan.package.price|default:0 %} disabledPlan {% endif %} ">
+          <div class="pri_table_list">
+            <h3> CheckOut<br/> 
+              <span>{{choosen_plan.name}}- Plan</span>
+            </h3>
+            <ol>
+              <li class="check">
+                  <span class="col-md-6 col-sm-6 col-xs-6">Plan </span>
+                  <span class="col-sm-4 "> {{choosen_plan.name}}<span>
+              </li>
+              <li class="check">
+                <span class="col-md-6 col-sm-6 col-xs-6"> Basic Price</span>
+                <span class="col-md-4 ">  ${{choosen_plan.get_formated_price}} <span>
+              </li>
+              <li class="check">
+                <span class="col-md-6 col-sm-6 col-xs-6"> Extra Charge</span>
+                <span class="col-md-4 ">  $0.00 <span>
+              </li>
+              <li class="check">
+                <span class="col-md-6 col-sm-6 col-xs-6"> Total </span>
+                <span class="col-md-4 "> ${{choosen_plan.get_formated_price}} <span>
+              </li>
+            </ol>
+            <form action="{% url 'create-checkout-session' choosen_plan.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit">Checkout</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- End Pricing Section -->
 
 {% endblock %}    

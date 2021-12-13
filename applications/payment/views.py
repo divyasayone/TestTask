@@ -25,8 +25,8 @@ from applications.payment.models import (Plan,PlanPurchaseHistory)
 class PlanListView(generic.ListView):
 	model = Plan
 	template_name = 'payments/pricing.html'
-	context_object_name = 'plans'	
-	
+	context_object_name = 'plans'
+
 	def get_queryset(self):
 		plans = Plan.objects.all().order_by('price')
 		return plans
@@ -126,7 +126,7 @@ def fulfill_order(session):
 	package = session["metadata"]["package_plan"]
 	package_active_days	=	int(session["metadata"]["active_period_days"])
 	expiry_date = datetime.now()+timedelta(package_active_days)
-	new_obj, created = PlanPurchaseHistory.objects.update_or_create(
+	new_obj,created = PlanPurchaseHistory.objects.update_or_create(
 							owner_id=user_id,
 							defaults = {
 								'owner_id': user_id,

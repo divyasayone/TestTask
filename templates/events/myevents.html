@@ -4,133 +4,133 @@
 {% block content %}
 
 
-  <!-- ======= Blog Header ======= -->
-    <div class="header-bg page-area">
-      <div class="container position-relative">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="slider-content text-center">
-              <div class="header-bottom">
-                <div class="layer2">
-                  <h1 class="title2">Events</h1>
-                </div>
-                <div class="layer3">
-                  <h2 class="title3"></h2>
-                </div>
+<!-- ======= Blog Header ======= -->
+  <div class="header-bg page-area">
+    <div class="container position-relative">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="slider-content text-center">
+            <div class="header-bottom">
+              <div class="layer2">
+                <h1 class="title2">Events</h1>
+              </div>
+              <div class="layer3">
+                <h2 class="title3"></h2>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div><!-- End Blog Header -->
+    </div>
+  </div>
+<!-- End Blog Header -->
 
-    <!-- ======= Team Section ======= -->
-    <div id="team" class="our-team-area area-padding">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="section-headline text-center">
-              <h2>Active Events</h2>
-            </div>
+<!-- ======= Team Section ======= -->
+  <div id="team" class="our-team-area area-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="section-headline text-center">
+            <h2>Active Events</h2>
           </div>
         </div>
-        <div class="row">
-          {% if myevents %}
-            {% for myevent in myevents %}
-            <div class="col-md-3 col-sm-3 col-xs-12 my_event_{{myevent.pk}}">
-              <div class="single-team-member">
-                <div class="team-img">
-                  <a href="#">
-                    {% if myevent.promo_picture %}
-                      <img src="{{myevent.promo_picture.url}}" alt="">
-                    {% else%}
-                      <img src="{% static 'assets/img/blog/1.jpg' %}" alt="">
-                    {% endif %}
-                  </a>
-                  <div class="team-social-icon text-center">
-                    {% if myevent.is_published  %}
-                    <p  class="event_activation_status_{{myevent.id}} fade_bg"> published</p>
-                    {% else %}
-                    <p  class="event_activation_status_{{myevent.id}} fade_bg"> unpublished</p>
-                    {% endif %}
+      </div>
+      <div class="row">
+        {% if myevents %}
+          {% for myevent in myevents %}
+          <div class="col-md-3 col-sm-3 col-xs-12 my_event_{{myevent.pk}}">
+            <div class="single-team-member">
+              <div class="team-img">
+                <a href="#">
+                  {% if myevent.promo_picture %}
+                    <img src="{{myevent.promo_picture.url}}" alt="">
+                  {% else%}
+                    <img src="{% static 'assets/img/blog/1.jpg' %}" alt="">
+                  {% endif %}
+                </a>
+                <div class="team-social-icon text-center">
+                  {% if myevent.is_published  %}
+                  <p  class="event_activation_status_{{myevent.id}} fade_bg"> published</p>
+                  {% else %}
+                  <p  class="event_activation_status_{{myevent.id}} fade_bg"> unpublished</p>
+                  {% endif %}
 
-                    <ul>
-                      {% if not myevent.is_published  %}
-                      <li>
-                        <a href="{% url 'publishevent' pk=myevent.pk %}" event_action="publish" class="event_activation" event_id={{myevent.pk}} >
-                          <i class="bi bi-lightbulb"></i>
-                        </a>
-                      </li>
-                      {% else %}
-                      <li>
-                        <a href="{% url 'unpublishevent' pk=myevent.pk %}" event_action="unpublish" class="event_activation" event_id={{myevent.pk}}>
-                          <i class="bi bi-lightbulb-off-fill"></i>
-                        </a>
-                      </li>
-                      {% endif %}
-                      <li>
-                        <a href="{% url 'event-detail' pk=myevent.pk %}" target="blank">
-                          <i class="bi bi-eye-fill"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="{% url 'editevent' pk=myevent.pk %}">
-                        <i class="bi bi-pencil-square"></i>                       
-                        </a>
-                      </li>
-                      <li>
-                        <a href="{% url 'deleteevent' pk=myevent.pk %}" class="delete_event" event_id="{{myevent.id}}">
-                        <i class="bi bi-trash"></i>                       
-                        </a>                       
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="team-content text-center">
-                  <h4>{{myevent.title|slice:15}}..</h4>
-                  <p>{{myevent.scheduled_from}}</p>
-                  <p>{{myevent.venue|slice:20}}</p>
-                </div>
-              </div>
-            </div>
-            {% endfor %}
-          {% else %}
-            <div class="col-md-12 text-center ">
-              <img src="{% static 'assets/img/blog/no_content.png' %}" alt="">
-            </div>             
-          {% endif %}
-          <!-- End column -->
-         
-          
-          <!-- End column -->
-        </div>
-
-        {% block pagination %}
-          {% if is_paginated %}
-            <div class="blog-pagination">
-                <ul class="pagination">
-                  {% if page_obj.has_previous %}
-                    <li class="page-item">
-                      <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" class="page-link">previous</a>
+                  <ul>
+                    {% if not myevent.is_published  %}
+                    <li>
+                      <a href="{% url 'publishevent' pk=myevent.pk %}" event_action="publish" class="event_activation" event_id={{myevent.pk}} >
+                        <i class="bi bi-lightbulb"></i>
+                      </a>
                     </li>
-                  {% endif %}
-                  <li class="page-item active">
-                    <a class="page-link">
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                    </a>
-                  </li>
-                  {% if page_obj.has_next %}
-                  <li class="page-item">
-                      <a href="{{ request.path }}?page={{ page_obj.next_page_number }}" class="page-link">next</a>
-                  </li>
-                  {% endif %}
-                </ul>
+                    {% else %}
+                    <li>
+                      <a href="{% url 'unpublishevent' pk=myevent.pk %}" event_action="unpublish" class="event_activation" event_id={{myevent.pk}}>
+                        <i class="bi bi-lightbulb-off-fill"></i>
+                      </a>
+                    </li>
+                    {% endif %}
+                    <li>
+                      <a href="{% url 'event-detail' pk=myevent.pk %}" target="blank">
+                        <i class="bi bi-eye-fill"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'editevent' pk=myevent.pk %}">
+                      <i class="bi bi-pencil-square"></i>                       
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'deleteevent' pk=myevent.pk %}" class="delete_event" event_id="{{myevent.id}}">
+                      <i class="bi bi-trash"></i>                       
+                      </a>                       
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="team-content text-center">
+                <h4>{{myevent.title|slice:15}}..</h4>
+                <p>{{myevent.scheduled_from}}</p>
+                <p>{{myevent.venue|slice:20}}</p>
+              </div>
             </div>
-          {% endif %}
-        {% endblock %}  
+          </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12 text-center ">
+            <img src="{% static 'assets/img/blog/no_content.png' %}" alt="">
+          </div>             
+        {% endif %}
+        <!-- End column -->
         
+        
+        <!-- End column -->
       </div>
-    </div><!-- End Team Section -->
+      {% block pagination %}
+        {% if is_paginated %}
+          <div class="blog-pagination">
+              <ul class="pagination">
+                {% if page_obj.has_previous %}
+                  <li class="page-item">
+                    <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" class="page-link">previous</a>
+                  </li>
+                {% endif %}
+                <li class="page-item active">
+                  <a class="page-link">
+                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                  </a>
+                </li>
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a href="{{ request.path }}?page={{ page_obj.next_page_number }}" class="page-link">next</a>
+                </li>
+                {% endif %}
+              </ul>
+          </div>
+        {% endif %}
+      {% endblock %}  
+    </div>
+  </div>
+<!-- End Team Section -->
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 

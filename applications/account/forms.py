@@ -119,7 +119,7 @@ class AuthenticationForm(forms.Form):
     Base class for authenticating users. Extend this to get a form that accepts
     username/password logins.
     """
-    username    = forms.EmailField(label=_("Email"), max_length=254, widget=forms.EmailInput(attrs={'class':'form-control'}))
+    username = forms.EmailField(label=_("Email"), max_length=254, widget=forms.EmailInput(attrs={'class':'form-control'}))
     # username = forms.CharField(max_length=254,widget=forms.TextInput(attrs={'class':'form-control'}))
     password = forms.CharField(label=_("Password"), widget=forms.PasswordInput(attrs={'class':'form-control'}))
 
