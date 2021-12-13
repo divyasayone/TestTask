@@ -3,7 +3,6 @@ from collections import OrderedDict
 from datetime import datetime
 from applications.eventChart.models import Event
 
-from dal import autocomplete
 
 '''
     events addinmg and updating form
@@ -14,7 +13,6 @@ class EventAddForm(forms.ModelForm):
         model = Event
         fields = '__all__'
         widgets = {
-                    # 'category' :    autocomplete.ModelSelect2(url='category-autocomplete'),
                     'scheduled_from': forms.DateInput(attrs={'placeholder': 'Select a date', 'type': 'datetime-local'}),
                     'scheduled_to': forms.DateInput(attrs={'placeholder': 'Select a date', 'type': 'datetime-local'}),
                 }

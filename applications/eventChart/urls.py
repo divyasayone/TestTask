@@ -10,7 +10,6 @@ from applications.eventChart.views import (
 	EventDetailView,
 	MyEventView,
 	ManageEventPublish,	
-	CategoryNameAutocomplete,
 )
 					
 
@@ -26,6 +25,5 @@ urlpatterns = [
 	path('publish/<int:pk>/', ManageEventPublish.as_view(), name='publishevent'),
 	path('unpublish/<int:pk>/', ManageEventPublish.as_view(), name='unpublishevent'),
 
-	url(r'^category-autocomplete/$', CategoryNameAutocomplete.as_view(), name='category-autocomplete',),
 
 ]
