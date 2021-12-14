@@ -1,4 +1,4 @@
-"""Events URL Configuration
+"""events URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('applications.account.urls')),
     path('', include('applications.core.urls')),
-    path('event/', include('applications.eventChart.urls')),
+    path('event/', include('applications.eventchart.urls')),
     path('payments/', include('applications.payment.urls')),
 ]
 if settings.DEBUG:

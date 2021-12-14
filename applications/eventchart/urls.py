@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf.urls import url
 
-from applications.eventChart.views import (
+from applications.eventchart.views import (
 
 	AddEventView,
 	UpdateEventView,

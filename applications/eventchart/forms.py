@@ -1,7 +1,7 @@
 from django import forms
 from collections import OrderedDict
 from datetime import datetime
-from applications.eventChart.models import Event
+from applications.eventchart.models import Event
 
 
 '''

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from applications.eventChart.models import (Event,EventCategory)
+from applications.eventchart.models import (Event,EventCategory)
 # Register your models here.
 
 admin.site.register(Event)

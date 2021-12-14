@@ -1,9 +1,9 @@
 from applications.payment.models import (Plan,PlanPurchaseHistory)
-from applications.eventChart.models import (Event)
+from applications.eventchart.models import (Event)
 from datetime import datetime
 
 from celery.app.utils import Settings
-from Events.celery import app
+from events.celery import app
 def DeactivatePurchasePlanAfterExpiry():
     active_purchase_history = PlanPurchaseHistory.objects.select_related('owner').filter(expiry_date__lte=datetime.now(), has_paid=True, is_active=True)
     purchase_owners = active_purchase_history.values_list('owner_id', flat=True)

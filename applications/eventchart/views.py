@@ -11,8 +11,8 @@ from django.http import Http404
 from django.http import HttpResponse,JsonResponse
 from django.conf import settings
 
-from applications.eventChart.forms import (EventAddForm)
-from applications.eventChart.models import (Event,EventCategory)
+from applications.eventchart.forms import (EventAddForm)
+from applications.eventchart.models import (Event,EventCategory)
 from applications.payment import models
 from applications.payment.models import (PlanPurchaseHistory)
 
