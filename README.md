@@ -1,4 +1,4 @@
-# TestProject
+# TestProject - Events Management
 
 A website for events publishing after stripe payement. .[refer](https://justdjango.com/blog/django-stripe-payments-tutorial)
 
